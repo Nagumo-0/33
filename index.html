@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Studio N</title>
+
+<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+
+<script>
+(function(){
+emailjs.init("YOUR_PUBLIC_KEY");
+})();
+</script>
+
+<style>
+body { margin:0; font-family: Arial; }
+header { background:#111; color:white; padding:15px; text-align:center; }
+section { padding:50px 20px; }
+.hero { background:#333; color:white; text-align:center; padding:100px 20px; }
+.container { max-width:800px; margin:auto; }
+input, textarea { width:100%; padding:10px; margin-top:10px; }
+button { padding:10px; background:black; color:white; border:none; margin-top:10px; }
+</style>
+</head>
+
+<body>
+
+<header><h2>Studio N</h2></header>
+
+<section class="hero">
+<h1>웹사이트 제작</h1>
+</section>
+
+<section>
+<div class="container">
+
+<h2>문의하기</h2>
+
+<form id="contact-form">
+<input type="text" name="name" placeholder="이름" required>
+<input type="email" name="email" placeholder="이메일" required>
+<textarea name="message" placeholder="문의 내용" required></textarea>
+<button type="submit">문의 보내기</button>
+</form>
+
+<p id="result"></p>
+
+</div>
+</section>
+
+<script>
+document.getElementById("contact-form")
+.addEventListener("submit", function(e){
+
+e.preventDefault();
+
+emailjs.init("Public Key");
+
+emailjs.sendForm(
+"Service ID",
+"Template ID",
+this
+)
+.then(function(){
+document.getElementById("result").innerText = "메일 전송 완료!";
+}, function(){
+document.getElementById("result").innerText = "실패";
+});
+
+});
+</script>
+
+</body>
+</html>
